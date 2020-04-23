@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Trang Login </title>
+	<script src="jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="source-control.js"></script>
+	<link rel="stylesheet" href="trangchu.css">
+</head>
+<body>
+<main class="pa4 black-80">
+  <form class="measure center">
+    <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+      <legend class="f4 fw6 ph0 mh0">Đăng Nhập</legend>
+      <div class="mt3">
+        <label class="db fw6 lh-copy f6" for="email-address">Tên Đăng Nhập</label>
+        <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address">
+      </div>
+      <div class="mv3">
+        <label class="db fw6 lh-copy f6" for="password">Mật Khẩu </label>
+        <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password">
+      </div>
+      <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"> Remember me</label>
+    </fieldset>
+    <div class="">
+      <input id="sign-in-button" class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in">
+    </div>
+    <div class="lh-copy mt3">
+      <a href="#0" class="f6 link dim black db">Sign up</a>
+      <a href="#0" class="f6 link dim black db">Forgot your password?</a>
+    </div>
+  </form>
+</main>
+	
+</body>
+</html>
