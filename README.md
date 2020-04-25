@@ -18,6 +18,6 @@
 4. `git push origin master` để gửi các thay đổi lên repo -> Bước này sẽ yêu cầu nhập username/pass của tài khoản github cá nhân
 *Có thể check lại trên repo xem file đã lên hay chưa*
 
-## File giaoviec.md  nằm trong folder *nhom* được viết bằng Markdown. Mọi người có thể xem file này bằng plugins Markdown của bất kì Editor nào
+## File giaoviec.md  nằm trong folder *NHOM* được viết bằng Markdown. Mọi người có thể xem file này bằng plugins Markdown của bất kì Editor nào
 
 
