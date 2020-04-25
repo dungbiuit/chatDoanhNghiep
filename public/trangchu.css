@@ -1,193 +1,201 @@
-.ba {
-    border-style: solid;
-    border-width: 1px;
+html, body {
+	height: 100%;
+	scroll-behavior: smooth;
+}
+/*Background của trang web*/
+.full-page-background {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #1a1a1a;
+	font-size: 12pt;
+}
+/*Phần đăng nhập của trang đăng nhập*/
+.main-box {
+	position: absolute;
+	width: 46em;
+	height: auto;
+	top: 34%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	font-family: 'Source Sans Pro', sans-serif;
+	//background-color: gray;
+}
+/*Ô chứa dòng chữ "Đăng nhập"*/
+.sign-in-box {
+	border: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
-.b--black {
-    border-color: #000;
+.sign-in-header {
+	font-weight: bold;
+	font-size: 50pt;
+	text-align: center;
+	margin-bottom: 0.8em;
+	color: #99a6b2;
+}
+/*Ô chứa các dạng input, dùng để dễ căn chỉnh layout*/
+.input-box {
+	width: 100%;
+	height: 5em;
+	//background-color: gray;
+}
+/*Các phần dưới dành cho ô nhập liệu*/
+.typein {
+	width: 90%;
+	height: 70%;
+	transform: translate(5%, 50%);
+	padding: 0;
+	margin: 0;
+	padding-left: 0.5em;
+	border-radius: 0.3em;
+	border: none;
+	font-size: 16pt;
+	line-height: 16pt;
 }
 
-.b--transparent {
-    border-color: transparent;
+.typein-hoverable:hover {
+	transition-duration: 0.1s;
+	width: 92%;
+	transform: translate(4%, 50%);
 }
 
-.db {
-    display: block;
+.typein:focus {
+	border: none;
+	outline: none;
+}
+.typein:focus::placeholder {
+  color: transparent;
+}
+/*Các phần dưới dành cho ô đánh dấu*/
+.checkbox-container {
+	width: 100%;
+	position: relative;
+	left: 4.5%;
+	top: 60%;
+	padding-left: 1.8em;
+	color: white;
+	font-size: 12pt;
+	line-height: 12pt;
+	-webkit-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+  	//background-color: black;
 }
 
-.dib {
-    display: inline-block;
+.checkbox-container input {
+	position: absolute;
+	opacity: 0;
+  	cursor: pointer;
+  	height: 0;
+  	width: 0;
 }
 
-.b {
-    font-weight: bold;
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: white;
+  border-radius: 0.4em;
+ }
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
 }
 
-.fw6 {
-    font-weight: 600;
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
 }
 
-.input-reset {
-    -webkit-appearance: none;
-       -moz-appearance: none;
+.checkbox-container .checkmark:after {
+  left: 0.4em;
+  top: 0.12em;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid white;
+  border-width: 0 0.2em 0.2em 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
-.input-reset::-moz-focus-inner {
-    border: 0;
-    padding: 0;
+.checkbox-container:hover input ~ .checkmark {
+  margin-left: 0.15em;
+  width: 1.35em;
+  height: 1.35em;
 }
 
-.lh-copy {
-    line-height: 1.5;
+.checkbox-container:hover {
+	transition-duration: 0.1s;
+	padding-left: 1.95em;
+	font-size: 13pt;
 }
 
-.link {
-    text-decoration: none;
-    transition: color .15s ease-in;
+.checkbox-container input:checked ~ .checkmark {
+  background-color: slategray;
+}
+/*Các phần dưới dành cho nút bấm*/
+.button {
+	border-radius: 0.3em;
+	border: none;
+	outline: none;
+	height: 70%;
+	width: 91%;
+	color: white;
+	background-color: slategray;
+	transform: translate(5%, 50%);
+	margin:  0;
+	padding: 0;
+	font-size: 16pt;
+	line-height: 16pt;
 }
 
-.link:link, .link:visited {
-    transition: color .15s ease-in;
+.button-hoverable:hover {
+	width: 93%;
+	transform: translate(4%, 50%);
+	transition-duration: 0.1s;
+}
+/*Ô chứa các tính năng còn lại*/
+.other-box {
+	border: none;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	margin-top: 2.8em;
+	//background-color: gray;
+}
+/*Đường link ở dạng văn bản*/
+.link-paragraph {
+	text-decoration: none;
+	color: white;
+	font-size: 12pt;
+	padding: 0;
+	margin: 0;
+	width: auto;
+	height: auto;
 }
 
-.link:hover {
-    transition: color .15s ease-in;
+.link-paragraph:hover {
+	padding-bottom: 0.1em;
+	border-bottom: 0.15em dotted white;
+	transition-duration: 0.1s;
+}
+/*Căn chỉnh vị trí cho đăng ký và quên mật khẩu*/
+.sign-up {
+	position: absolute;
+	left: 37.5%;
 }
 
-.link:active {
-    transition: color .15s ease-in;
+.forgot-pwd {
+	position: absolute;
+	right: 36.5%;
 }
-
-.link:focus {
-    transition: color .15s ease-in;
-    outline: 1px dotted currentColor;
-}
-
-.w-100 {
-    width: 100%;
-}
-
-.black-80 {
-    color: rgba(0, 0, 0, .8);
-}
-
-.black {
-    color: #000;
-}
-
-.bg-transparent {
-    background-color: transparent;
-}
-
-.hover-white:hover {
-    color: #fff;
-}
-
-.hover-white:focus {
-    color: #fff;
-}
-
-.hover-bg-black:hover {
-    background-color: #000;
-}
-
-.hover-bg-black:focus {
-    background-color: #000;
-}
-
-.pa0 {
-    padding: 0;
-}
-
-.pa2 {
-    padding: .5rem;
-}
-
-.pa4 {
-    padding: 2rem;
-}
-
-.pv2 {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-}
-
-.ph0 {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.ph3 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.ma0 {
-    margin: 0;
-}
-
-.mt3 {
-    margin-top: 1rem;
-}
-
-.mv3 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-.mh0 {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.f4 {
-    font-size: 1.25rem;
-}
-
-.f6 {
-    font-size: .875rem;
-}
-
-.measure {
-    max-width: 30em;
-}
-
-.center {
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.dim {
-    opacity: 1;
-    transition: opacity .15s ease-in;
-}
-
-.dim:hover, .dim:focus {
-    opacity: .5;
-    transition: opacity .15s ease-in;
-}
-
-.dim:active {
-    opacity: .8;
-    transition: opacity .15s ease-out;
-}
-
-.grow {
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform .25s ease-out;
-}
-
-.grow:hover, .grow:focus {
-    transform: scale(1.05);
-}
-
-.grow:active {
-    transform: scale(.9);
-}
-
-.pointer:hover {
-    cursor: pointer;
-}
-
