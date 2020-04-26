@@ -32,7 +32,7 @@ html, body {
 
 .sign-in-header {
 	font-weight: bold;
-	font-size: 50pt;
+	font-size: 58pt;
 	text-align: center;
 	margin-bottom: 0.8em;
 	color: #99a6b2;
@@ -136,7 +136,7 @@ html, body {
 .checkbox-container:hover {
 	transition-duration: 0.1s;
 	padding-left: 1.95em;
-	font-size: 13pt;
+	font-size: 12.6pt;
 }
 
 .checkbox-container input:checked ~ .checkmark {
