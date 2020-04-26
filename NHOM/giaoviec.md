@@ -8,7 +8,7 @@
 ## Việc của riêng
 ## Mọi người làm xong việc nào cứ đánh dấu x bên trong ngoặc vuông nó sẽ tự hiện thành công và sau này git push sẽ update để mọi người cùng thấy
 ###Đăng 
-- [] Chỉnh lại trang greeting.ejs sao cho có hình xác nhận và tên người mới nhập + nút bấm xác nhận để qua trang tiếp theo  (có thể tên chưa cần từ cái nhập bên username nên có thể gán cứng )
+- [X]  Task bị hủy do thiết kế lại toàn bộ giao diện. /*Chỉnh lại trang greeting.ejs sao cho có hình xác nhận và tên người mới nhập + nút bấm xác nhận để qua trang tiếp theo  (có thể tên chưa cần từ cái nhập bên username nên có thể gán cứng ).*/
 
 - [] Tìm hiểu khái niệm **"routes"** trong express giúp t cách điều hướng trang URL 
 
