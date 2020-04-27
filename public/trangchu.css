@@ -1,6 +1,7 @@
 html, body {
 	height: 100%;
 	scroll-behavior: smooth;
+	margin: 0;
 }
 /*Background của trang web*/
 .full-page-background {
@@ -150,7 +151,7 @@ html, body {
 	height: 70%;
 	width: 91%;
 	color: white;
-	background-color: slategray;
+	background-color: forestgreen;
 	transform: translate(5%, 50%);
 	margin:  0;
 	padding: 0;
