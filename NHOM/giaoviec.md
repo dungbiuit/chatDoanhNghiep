@@ -10,7 +10,7 @@
 ###Đăng 
 - [X]  Task bị hủy do thiết kế lại toàn bộ giao diện. /*Chỉnh lại trang greeting.ejs sao cho có hình xác nhận và tên người mới nhập + nút bấm xác nhận để qua trang tiếp theo  (có thể tên chưa cần từ cái nhập bên username nên có thể gán cứng ).*/
 
-- [] Tìm hiểu khái niệm **"routes"** trong express giúp t cách điều hướng trang URL 
+- [X] Tìm hiểu khái niệm **"routes"** trong express giúp t cách điều hướng trang URL 
 
 ###Hậu 
 - [] Thêm chức năng trò chuyện 1 mình (kiểu mình gõ gì xong nó trả lời lại luôn) trên 1 trang web mới (đuôi ejs)
