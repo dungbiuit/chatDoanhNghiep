@@ -17,8 +17,12 @@ io.on("connection", (socket) =>{
 		console.log("Tên người dùng này là " + dataReceive);
 	});
 })
-
+//Route đến trang chủ khi nhập localhost:3000
 app.get("/", (request, respond) => {
 	respond.render("trangchu");
+});
+//Route đến trang đăng ký khi nhấn vào link đăng ký trong trang chủ
+app.get("/trangdangky", (request,respond) => {
+	respond.render("trangdangky");
 });
 
