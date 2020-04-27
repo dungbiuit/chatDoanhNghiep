@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Trang đăng ký</title>
+	<script src="jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="source-control.js"></script>
+	<link rel="stylesheet" href="trangchu.css">
+	<link rel="stylesheet" href="trangdangky.css">
+
+	<!-- Thêm font chữ ở dưới đây -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap&subset=vietnamese" rel="stylesheet">
+	
+	</head>
+	<body>
+		<div class="full-page-background">
+			<main class="main-box main-box-sign-up">
+
+				<!-- Phần nhập thông tin đăng ký -->
+
+				<form>
+					<fieldset id="sign-up" class="sign-up-box">
+						<legend class="sign-up-header">Đăng ký</legend>
+						<div class="sign-up-typein-field">
+
+							<!-- Ô nhập tên đại diện -->
+							
+							<div class="input-box sign-up-input-box">
+								<input type="text" name="username" class="typein typein-hoverable" placeholder="Tên đại diện">
+							</div>
+
+							<!-- Ô nhập email -->
+
+							<div class="input-box sign-up-input-box">
+								<input type="email" name="sign-up-email-address" class="typein typein-hoverable" placeholder="Email đăng ký">
+							</div>
+
+							<!-- Ô nhập mật khẩu -->
+
+							<div class="input-box sign-up-input-box">
+								<input type="password" name="sign-up-password" class="typein typein-hoverable" placeholder="Mật khẩu">
+							</div>
+
+							<!-- Ô nhập lại mật khẩu -->
+
+							<div class="input-box sign-up-input-box">
+								<input type="password" name="retype-sign-up-password" class="typein typein-hoverable" placeholder="Nhập lại mật khẩu">
+							</div>
+						</div>
+						<div class="sign-up-other-field">
+							<div class="input-box avatar-input-box">
+								<div class="avatar-viewport">
+
+									<!-- Ảnh avatar mặc định (lỗi không load được ảnh)
+
+									<img src="../public/images/quikcon_default_avatar.png" alt="avatar">
+
+									-->
+
+								</div>
+							</div>
+
+							<!-- Nút đăng ảnh -->
+
+							<div class="input-box">
+								<label class="upload-button">
+									<input type="file" name="avatar" accept="image/*">
+									<span>Đăng ảnh</span>
+								</label>
+							</div>
+
+							<!-- Nút đăng ký -->
+
+							<div class="input-box">
+								<button class="button sign-up-button sign-up-button-hoverable">Đăng ký</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</main>
+		</div>
+	</body>
+</html>
