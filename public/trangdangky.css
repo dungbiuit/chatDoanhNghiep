@@ -1,0 +1,96 @@
+/*Đặc tính riêng của phần đăng ký*/
+.main-box-sign-up {
+    width: 54em;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    //background-color: gray;
+}
+
+.sign-up-box {
+    border: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    clear: right;
+}
+
+.sign-up-header {
+    font-weight: bold;
+    font-size: 58pt;
+    text-align: center;
+    margin-bottom: 0.6em;
+    color: #99a6b2;
+}
+/*Phần nhập liệu bên trái*/
+.sign-up-typein-field {
+    width: 55%;
+    margin-left: 5%;
+    height: auto;
+    float: left;
+    //background-color: blue;
+}
+
+.sign-up-input-box {
+    margin-bottom: 1.5em;
+    //background-color: green;
+}
+/*Phần thêm avatar và nút đăng ký bên phải*/
+.sign-up-other-field {
+    width: 40%;
+    height: auto;
+    float: left;
+    //background-color: red;
+}
+
+.avatar-input-box {
+    height: 14em;
+    //background-color: yellow;
+}
+/*Khung hiện ảnh avatar được tải lên*/
+.avatar-viewport {
+    width: 11em;
+    height: 11em;
+    background-color: white;
+    border-radius: 0.7em;
+    border: none;
+    position: absolute;
+    transform: translate(50%, 16%);
+}
+/*Nút đăng ảnh*/
+.upload-button {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(133%, 40%);
+    font-size: 12pt;
+    line-height: 12pt;
+    text-align: center;
+    padding: 0.5em 1em 0.5em 1em;
+    display: inline-block;
+    border-radius: 0.3em;
+    background-color: slategray;
+    color: white;
+}
+
+.upload-button input[type=file] {
+    display: none;
+}
+
+.upload-button:hover {
+    transition-duration: 0.1s;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    transform: translate(121.5%, 40%);
+}
+/*Nút đăng ký*/
+.sign-up-button {
+    width: 8.2em;
+    transform: translate(50%, 68%);
+}
+
+.sign-up-button-hoverable:hover {
+    width: 8.6em;
+    transform: translate(45.5%, 68%);
+    transition-duration: 0.1s;
+}
