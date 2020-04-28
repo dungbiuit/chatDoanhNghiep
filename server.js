@@ -1,8 +1,10 @@
 let express = require("express");
-
+let body_parser = require("body-parser");
 let app = express();
 
 app.use(express.static("public"));
+app.use(body_parser.urlencoded({ extended: false }));
+
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
@@ -11,11 +13,16 @@ let io = require("socket.io")(server);
 server.listen(3000);
 
 io.on("connection", (socket) =>{
-	console.log("Có người log vào với ID là  " + socket.id);
+	console.log("có người log vào với id là  " + socket.id);
 
-	socket.on("Client-send-sign-in", dataReceive => {
-		console.log("Tên người dùng này là " + dataReceive);
+	socket.on("client-send-sign-in", datareceive => {
+	console.log("tên người dùng này là " + datareceive);
 	});
+
+//	socket.on("client-send-sign-up", userreceive  => {
+	//	console.log("username: " + userreceive.username);
+//	});
+
 })
 //Route đến trang chủ khi nhập localhost:3000
 app.get("/", (request, respond) => {
@@ -25,4 +32,11 @@ app.get("/", (request, respond) => {
 app.get("/trangdangky", (request,respond) => {
 	respond.render("trangdangky");
 });
+app.post("/trangdangky", (request,respond) => {
+console.log(JSON.stringify(request.body));	
+//respond.redirect("/");
 
+});
+app.get("/post-sign-in", (request,respond) => {
+	respond.render("post-sign-in");
+});

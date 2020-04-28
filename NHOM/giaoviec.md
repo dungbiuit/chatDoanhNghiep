@@ -7,17 +7,19 @@
 
 ## Việc của riêng
 ## Mọi người làm xong việc nào cứ đánh dấu x bên trong ngoặc vuông nó sẽ tự hiện thành công và sau này git push sẽ update để mọi người cùng thấy
-###Đăng 
-- [X]  Task bị hủy do thiết kế lại toàn bộ giao diện. /*Chỉnh lại trang greeting.ejs sao cho có hình xác nhận và tên người mới nhập + nút bấm xác nhận để qua trang tiếp theo  (có thể tên chưa cần từ cái nhập bên username nên có thể gán cứng ).*/
+### Đăng 
 
-- [X] Tìm hiểu khái niệm **"routes"** trong express giúp t cách điều hướng trang URL 
+-  [X]  Task bị hủy do thiết kế lại toàn bộ giao diện. /*Chỉnh lại trang greeting.ejs sao cho có hình xác nhận và tên người mới nhập + nút bấm xác nhận để qua trang tiếp theo  (có thể tên chưa cần từ cái nhập bên username nên có thể gán cứng ).*/
 
-###Hậu 
-- [] Thêm chức năng trò chuyện 1 mình (kiểu mình gõ gì xong nó trả lời lại luôn) trên 1 trang web mới (đuôi ejs)
+- [x]  Tìm hiểu khái niệm **"routes"** trong express giúp t cách điều hướng trang URL 
 
-- [] Giúp t cách extends cái socket để nó có thể lưu trữ được **username + pass** để sau này dễ nhận biết loại nhân viên
+### Hậu 
+- [ ] Thêm chức năng trò chuyện 1 mình (kiểu mình gõ gì xong nó trả lời lại luôn) trên 1 trang web mới (đuôi ejs)
 
-###Biu
+- [ ] Giúp t cách extends cái socket để nó có thể lưu trữ được **username + pass** để sau này dễ nhận biết loại nhân viên
 
-- [] hỗ trợ Hậu cái extends và chức năng thêm thành viên thông qua đăng ký
+### Biu
+
+- [ ] hỗ trợ Hậu cái extends và chức năng thêm thành viên thông qua đăng ký
+
 *AI chưa xong việc hay có khó khăn cứ í ới trên group sẽ cùng nhau giúp đỡ :))*
