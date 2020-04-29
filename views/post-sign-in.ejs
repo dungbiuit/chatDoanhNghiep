@@ -1,9 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+	<meta charset="utf-8">
+	<title>Phòng chat Quikcon</title>
+	<script src="jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="source-control.js"></script>
+	<link rel="stylesheet" href="trangchu.css">
+	<link rel="stylesheet" href="trangdangky.css">
+	<link rel="stylesheet" href="phongchat.css">
+
+	<!-- Thêm font chữ ở dưới đây -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap&subset=vietnamese" rel="stylesheet">
+
 </head>
 <body>
+	<div class="full-page-background background-fixed">
+
+		<!-- Khu vực chọn phòng -->
+
+		<div class="interaction-box">
+			<div class="content-box">
+				<div class="content-box-header">
+					<h2>Danh sách phòng họp. (Nhấn vào một phòng để tham gia)</h2>
+				</div>
+
+				<!-- Bảng danh sách -->
+
+				<div class="content-window">
+
+					<!-- Tag <a> ở dưới là 1 item phòng chat của danh sách phòng, cho nó vào vòng lặp để in ra danh sách các phòng -->
+
+					<a href="#0" class="room-as-item clickable-item">
+						<div class="avatar-viewport avatar-on-item">
+
+							<!-- Chưa tìm được cách bỏ hình mặc định vào đây -->						
+						</div>
+						<p class="room-name-on-item">Phòng họp ban quản trị</p>
+					</a>
+				</div>
+			</div>
+
+			<!-- Khu vực nhập liệu cho danh sách phòng -->
+
+			<div class="input-box">
+					<input type="text" name="" class="typein typein-chatbox" placeholder="Nhập tên phòng họp tại đây">
+					<button class="button chatbox-button green-button">Tìm</button>
+					<button class="button chatbox-button blue-button">Tạo</button>
+			</div>
+		</div>
+
+		<!-- Khu vực cho những tính năng khác -->
+
+		<div class="other-box">
+
+			<!-- Ô thông tin người dùng -->
+
+			<div class="user-info-box">
+				<div class="avatar-viewport avatar-on-info-box">
+																																																																																																									
+				</div>
+				<p class="username-on-info-box">Nguyễn Văn Test</p>
+			</div>
+
+			<!-- Nút đăng xuất -->
+
+			<div class="input-box">
+				<button class="button log-out-button">Đăng xuất</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
