@@ -35,6 +35,8 @@ html, body {
 	font-weight: bold;
 	font-size: 58pt;
 	text-align: center;
+	padding: 0;
+	margin: 0;
 	margin-bottom: 0.8em;
 	color: #99a6b2;
 }
@@ -194,10 +196,12 @@ html, body {
 /*Căn chỉnh vị trí cho đăng ký và quên mật khẩu*/
 .sign-up {
 	position: absolute;
-	left: 37.5%;
+	left: 46%;
+	bottom: -5%;
 }
 
 .forgot-pwd {
 	position: absolute;
-	right: 36.5%;
+	left: 42.7%;
+	bottom: 1%;
 }
