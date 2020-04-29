@@ -1,3 +1,29 @@
+# Ngày 30/4
+
+## Việc của chung 
+- Tìm hiểu về cách lấy dữ liệu từ định dạng JSON 
+## Việc của riêng
+
+## Đăng
+- [] Tiếp tục hoàn tất layout trang post-sign-in.ejs và
+
+- [] Hỗ trợ Hậu phần chat **khi chat mọi người đều có thể thấy**
+
+## Hậu 
+
+- [] Tiếp tục xem clip hướng dẫn SocketIO
+- [] Cố gắng hoàn tất  trang khi vào phòng chat 
+
+##Biu
+
+- [] Tìm cách lưu lại mảng user
+- [] Khi vào trang post-sign-in sẽ hiện các thông tin người dùng hiện tại 
+
+
+
+
+
+
 #Ngày 26/4
 ## Việc của chung
 1. Xem 2 clip trên Youtube để hiểu rõ về nguyên lý SocketIO https://www.youtube.com/watch?v=ofptoO93IFI&t=3932s và https://www.youtube.com/watch?v=ovAeRVUiuvA&t=1736s
@@ -20,6 +46,6 @@
 
 ### Biu
 
-- [ ] hỗ trợ Hậu cái extends và chức năng thêm thành viên thông qua đăng ký
+- [x] hỗ trợ Hậu cái extends và chức năng thêm thành viên thông qua đăng ký
 
 *AI chưa xong việc hay có khó khăn cứ í ới trên group sẽ cùng nhau giúp đỡ :))*

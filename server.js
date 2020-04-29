@@ -15,6 +15,7 @@ server.listen(3000);
 
 //Biến toàn cục quan trọng
 let usersArray = [];
+
 io.on("connection", (socket) =>{
 	console.log("có người log vào với id là  " + socket.id);
 
@@ -73,8 +74,8 @@ const returnUserAfterClickSignUp = (request) => {
 
 const addUserToUserArray = (userAdd, userArray) => {
 	if(checkEmailExistionOfUserAdd(userAdd, userArray) === false 
-				&&
-	   checkRetypePassword(userAdd.firstTypePassword, userAdd.retypePassword) ) {
+		&&
+		checkRetypePassword(userAdd.firstTypePassword, userAdd.retypePassword) ) {
 
 		userArray.push(userAdd);
 	}
