@@ -1,4 +1,5 @@
 let express = require("express");
+
 let body_parser = require("body-parser");
 let app = express();
 
@@ -12,18 +13,18 @@ let server = require("http").Server(app);
 let io = require("socket.io")(server);
 server.listen(3000);
 
+//Biến toàn cục quan trọng
+let usersArray = [];
 io.on("connection", (socket) =>{
 	console.log("có người log vào với id là  " + socket.id);
 
 	socket.on("client-send-sign-in", datareceive => {
-	console.log("tên người dùng này là " + datareceive);
+		console.log("tên người dùng này là " + datareceive);
 	});
 
-//	socket.on("client-send-sign-up", userreceive  => {
-	//	console.log("username: " + userreceive.username);
-//	});
 
 })
+//Điều hướng app (routes)
 //Route đến trang chủ khi nhập localhost:3000
 app.get("/", (request, respond) => {
 	respond.render("trangchu");
@@ -32,11 +33,60 @@ app.get("/", (request, respond) => {
 app.get("/trangdangky", (request,respond) => {
 	respond.render("trangdangky");
 });
+//Xử lý các điều kiện đăng ký thành viên 
 app.post("/trangdangky", (request,respond) => {
-console.log(JSON.stringify(request.body));	
-//respond.redirect("/");
-
+	let userReceive = returnUserAfterClickSignUp(request);
+	console.log(userReceive);
+	let webPageRender = returnWebPageAfterCheckPassword(userReceive.firstTypePassword, userReceive.retypePassword);
+	respond.redirect(webPageRender);
+	addUserToUserArray(userReceive, usersArray);
+	console.log(usersArray);
 });
+
 app.get("/post-sign-in", (request,respond) => {
 	respond.render("post-sign-in");
 });
+// Hàm xử lý 
+const returnWebPageAfterCheckPassword = (firstPassword, retypePassword) =>{
+	let webPageReturn = "";
+	if(checkRetypePassword(firstPassword, retypePassword)){
+		webPageReturn = "/"
+	}
+	else
+		webPageReturn = "trangdangky";
+	return webPageReturn;
+}
+
+const checkRetypePassword = (firstPassword, retypePassword) => {
+	if(firstPassword !== retypePassword){
+		return false;
+	}
+	return true;
+}
+
+
+const returnUserAfterClickSignUp = (request) => {
+	let userReturn = JSON.stringify(request.body);	
+	userReturn = JSON.parse(userReturn);
+	return userReturn;	
+}
+
+const addUserToUserArray = (userAdd, userArray) => {
+	if(checkEmailExistionOfUserAdd(userAdd, userArray) === false 
+				&&
+	   checkRetypePassword(userAdd.firstTypePassword, userAdd.retypePassword) ) {
+
+		userArray.push(userAdd);
+	}
+	else
+		console.log("Thêm thất bại");
+}
+
+const checkEmailExistionOfUserAdd = (userAdd, userArray) => {
+	for (eachUser of userArray) {
+		if(userAdd.emailSignUp === eachUser.emailSignUp) {
+			return true;
+		}
+	}
+	return false;
+}
