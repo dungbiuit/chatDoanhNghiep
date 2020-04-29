@@ -1,0 +1,190 @@
+.background-fixed {
+	min-width: 66em;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+/*Vùng chứa ô chat, danh sách phòng và ô nhập liệu*/
+.interaction-box {
+	margin: 0;
+	padding: 0;
+	width: 70%;
+	min-width: 42em;
+	height: 100%;
+	float: left;
+	//background-color: red;
+}
+/*Vùng hiện thông tin các người dùng*/
+.other-box {
+	width: 30%;
+	height: 100%;
+	float: right;
+	margin: 0;
+	padding: 0;
+	//background-color: cyan;
+}
+
+.content-box {
+	position: relative;
+	width: 100%;
+	height: 88%;
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	//background-color: black;
+}
+
+.content-box-header {
+	color: white;
+	text-align: left;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	margin-left: 6%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+/*Khung nội dung, dành cho danh sách phòng và chatbox*/
+.content-window {
+	width: 90%;
+	height: 84%;
+	max-height: 84%;
+	background-color: transparent;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -47%);
+	border: 0;
+	border-radius: 0.7em;
+	display: block;
+	overflow: auto;
+	overflow-y: overlay;
+}
+/*Ô nhập liệu cho chat room*/
+.typein-chatbox {
+	width: 68%;
+	transform: translate(6.8%, -25%);
+}
+
+.typein-chatbox:hover {
+	transition-duration: 0.1s;
+	width: 69%;
+	transform: translate(7%, -25%);
+}
+/*Nút riêng của chat room*/
+.chatbox-button {
+	width: 8.1%;
+}
+
+.chatbox-button:hover {
+	transition-duration: 0.1s;
+	width: 8.4%;
+}
+
+.green-button {
+	transform: translate(70%, -25%);
+}
+
+.green-button:hover {
+	transform: translate(71.5%, -25%);
+}
+
+.blue-button {
+	background-color: #0073e6;
+	transform: translate(80%, -25%);
+}
+
+.blue-button:hover {
+	transform: translate(82%, -25%);
+}
+/*item phòng chat trong danh sách phòng*/
+.room-as-item {
+	margin-bottom: 2%;
+	width: 97%;
+	height: 8em;
+	background-color: slategray;
+	border-radius: 0.7em;
+}
+
+.room-as-item:hover {
+	width: 98%;
+	padding-bottom: 0.5%;
+	transition-duration: 0.1s;
+}
+
+.clickable-item {
+	display: block;
+	background-color: slategray;
+	padding: 0;
+	position: relative;
+}
+
+.avatar-on-item {
+	width: 6em;
+	height: 6em;
+	transform: translate(18%,16%);
+	cursor: pointer;
+}
+
+.room-name-on-item {
+	display: inline-block;
+	max-width: 70%;
+	color: white;
+	font-size: 24pt;
+	cursor: pointer;
+	position: absolute;
+	margin-top: 1.3em;
+	margin-left: 4.3em;
+	padding: 0;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	//background-color: yellow;
+}
+/*Ô thông tin người dùng*/
+.user-info-box {
+	width: 70%;
+	height: 40%;
+	position: relative;
+	top: 29.3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 0;
+	border-radius: 0.7em;
+	background-color: slategray;
+}
+
+.avatar-on-info-box {
+	position: absolute;
+	top: 37%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.username-on-info-box {
+	max-width: 80%;
+	text-align: center;
+	color: white;
+	font-size: 20pt;
+	font-weight: bold;
+	position: absolute;
+	top: 71%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+/*Nút đăng xuất*/
+.log-out-button {
+	width: 70%;
+	background-color: #ff3c1a;
+	transform: translate(21.55%, 180%);
+}
+
+.log-out-button:hover {
+	width: 72%;
+	transform: translate(19.55%, 180%);
+	transition-duration: 0.1s;
+}
