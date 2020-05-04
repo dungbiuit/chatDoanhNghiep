@@ -80,24 +80,24 @@
 			var $messageArea = $('#messageArea');
 			var $users = $('#users');
 			let $username = $('#username');
-
+			//gửi đoạn tin nhắn qua id message tại form input
 			$messageForm.submit(function (e) {
 				e.preventDefault();
 				socket.emit('send message', $message.val());
 				$message.val('');
 			});
 
-			// send message
+			// hiển thị dòng chat
 			// TODO: chỉnh css cho từng dòng chat 
 			socket.on('new message', function (data) {
 				$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + '</div>');
 			});
 
-			//after login
+			//sau khi login thì show trang nhắn tin
 			socket.emit('new user', $username.val(), function (data) {
 				$messageArea.show();
 			});
-
+			// danh sách các id hiển thị qua html 
 			socket.on('get users', function (data) {
 				var html = '';
 				//  TODO: chỉnh css cho danh sách các id 
