@@ -1,3 +1,20 @@
+# Ngày 5/5
+
+## Việc của chung 
+- Bổ sung chức năng chat cho 1 nhóm người nhất định 
+
+## Việc của riêng
+## Đăng
+
+- [ ] Hoàn tất giao diện trang inbox.ejs (Tìm từ khóa **TODO**  để biết các dòng sinh thêm trong chat)
+
+- [ ] Tham khảo phần Backend  các cơ chế socket.on soccet.emit 
+
+## Hậu 
+- [] Xem chức năng khi vào phòng đều thông báo ở các cửa sổ người dùng khác
+
+## Biu
+- [] Thêm chức năng chọn được người để nói chuyện riêng 
 # Ngày 30/4
 
 ## Việc của chung 
