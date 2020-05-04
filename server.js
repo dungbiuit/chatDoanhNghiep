@@ -15,7 +15,7 @@ app.set("views", "./views");
 let server = require("http").Server(app);
 let io = require("socket.io")(server);
 server.listen(3000);
-
+// connect socket
 io.on("connection", (socket) =>{
 	console.log("có người log vào với id là  " + socket.id);
 
@@ -26,7 +26,7 @@ io.sockets.on('connection', function(socket){
 	connections.push(socket);
 	console.log('Connected: %s sockets connected', connections.length);
 	
-	// Disconnect
+	// Disconnect socket
 	socket.on('disconnect', function(data){
 		users.splice(users.indexOf(socket.id), 1);
 		updateUsernames();
@@ -40,7 +40,7 @@ io.sockets.on('connection', function(socket){
 		io.sockets.emit('new message', {msg: data, user: socket.id});
 	});
 
-	// New User
+	// Tạo users
 	socket.on('new user', function(data, callback){
 		callback(true);
 	//	socket.username = data;
