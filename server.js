@@ -14,7 +14,7 @@ app.set("views", "./views");
 
 let server = require("http").Server(app);
 let io = require("socket.io")(server);
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 io.on("connection", (socket) =>{
 	console.log("có người log vào với id là  " + socket.id);
