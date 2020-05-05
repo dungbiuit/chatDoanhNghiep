@@ -1,74 +1,89 @@
 <html>
 
 <head>
-	<title>IO chatApp</title>
+	<title>Phòng chat Quikcon</title>
 	<meta charset="utf-8">
-	<title>Trang Đăng Nhập</title>
+
+	<!-- Scripts -->
+
 	<script src="jquery.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="source-control.js"></script>
-	<link rel="stylesheet" href="trangdangky.css">
-	<link rel="stylesheet" href="phongchat.css">
-	<link rel="stylesheet" href="trangchu.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-	<style>
-		#messageArea {
-			display: none;
-		}
-	</style>
+	
+	<!-- CSS -->
+
+	<link rel="stylesheet" href="trangchu.css">
+	<link rel="stylesheet" href="trangdangky.css">
+	<link rel="stylesheet" href="phongchat.css">
+	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
+
+	<!-- Thêm font chữ ở dưới đây -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap&subset=vietnamese" rel="stylesheet">
+
 </head>
 
 <body>
 
+	<!-- Nền màu tối của trang web, toàn bộ nội dung trang web được bọc trong div này -->
 
-	<div class="container">
-		<!--Login Page-->
-		<div class="full-page-background background-fixed" id="messageArea">
+	<div class="full-page-background background-fixed">
 
-			<!-- Khu vực chọn phòng -->
+		<!-- Phần bên trái màn hình -->
 
-			<div class="interaction-box">
-				<div class="content-box">
-					<div class="content-box-header">
-						<h2>Phòng chat:</h2>
+		<div class="interaction-box">
 
-					</div>
+			<!-- Phần dành cho chat -->
 
+			<div class="content-box" id="messageArea">
 
-					<!-- Bảng danh sách -->
+				<!-- Tên phòng -->
 
-					<div class="content-window">
+				<div class="content-box-header">
+					<h2>Phòng chat số 1</h2>
+				</div>
 
-						<!-- Tag <a> ở dưới là 1 item phòng chat của danh sách phòng, cho nó vào vòng lặp để in ra danh sách các phòng -->
-						<ul class="list-group" id="users"></ul>
-					</div>
+				<!-- Cửa sổ chat -->
 
-					<div class="col-md-8">
-						<div class="chat" id="chat"></div>
+				<div class="content-window" id="chatbox">
+					
+					<!-- Nền màu trắng của cửa sổ chat -->
+					
+					<div class="chatbox-background">
+						
+						<!-- Tin nhắn được in ra ở div này -->
 
-						<form id="messageForm">
-							<div class="form-group">
-								<table>
-									<tr>
-										<!-- Khu vực gõ tin nhắn và nút gửi  !-->
-										<th><textarea class="form-control" id="message"
-												placeholder="Nhập tin nhắn..."></textarea></th>
-										<th> <input type="submit" class="btn btn-primary" value="Gửi tin nhắn" /></th>
-									</tr>
-								</table>
-							</div>
-						</form>
+						<div class="chat-bubble-wrapper" id="chat"></div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Khu vực cho những tính năng khác -->
+			<!-- Ô nhập liệu và nút gửi -->
+
+			<form class="input-box" id="messageForm">
+
+					<!-- Ô nhập tin nhắn -->
+
+					<input type="text" id="message" class="typein typein-chatbox typein-chatbox-message" placeholder="Nhập tin nhắn tại đây">
+
+					<!-- Nút gửi -->
+
+					<button class="button chatbox-button green-button">Gửi</button>
+			</form>
 		</div>
+
+		<!-- Phần bên phải màn hình -->
+
+		<div class="other-box">
+			<div class="user-info-box chatroom-members-info" id="users">
+			</div>
+		</div>
+
 	</div>
 
 	<script>
@@ -88,9 +103,16 @@
 			});
 
 			// hiển thị dòng chat
-			// TODO: chỉnh css cho từng dòng chat 
 			socket.on('new message', function (data) {
-				$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + '</div>');
+				$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
+
+				//Script cho tính năng tự động cuộn xuống dưới cùng khi có tin nhắn mới.
+
+				var out = document.getElementById("chatbox");
+				var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+				if(isScrolledToBottom) {
+						out.scrollTop = out.scrollHeight - out.clientHeight;
+				}
 			});
 
 			//sau khi login thì show trang nhắn tin
@@ -102,7 +124,7 @@
 				var html = '';
 				//  TODO: chỉnh css cho danh sách các id 
 				for (i = 0; i < data.length; i++) {
-					html += '<li class="list-group-item">' + data[i] + '</li>';
+					html += '<div class="member-username-as-item list">' + data[i] + '</div>';
 
 				}
 				$users.html(html);
