@@ -1,114 +1,114 @@
 <html>
 
-<head>
-	<title>IO chatApp</title>
-	<meta charset="utf-8">
-	<title>Trang Đăng Nhập</title>
-	<script src="jquery.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="source-control.js"></script>
-	<link rel="stylesheet" href="trangdangky.css">
-	<link rel="stylesheet" href="phongchat.css">
-	<link rel="stylesheet" href="trangchu.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-	<style>
-		#messageArea {
-			display: none;
-		}
-	</style>
-</head>
+	<head>
+		<title>IO chatApp</title>
+		<meta charset="utf-8">
+		<title>Trang Đăng Nhập</title>
+		<script src="jquery.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="source-control.js"></script>
+		<link rel="stylesheet" href="trangdangky.css">
+		<link rel="stylesheet" href="phongchat.css">
+		<link rel="stylesheet" href="trangchu.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+				 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+     crossorigin="anonymous"></script>
+		<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+		<style>
+#messageArea {
+	display: none;
+}
+		</style>
+	</head>
 
-<body>
-
-
-	<div class="container">
-		<!--Login Page-->
-		<div class="full-page-background background-fixed" id="messageArea">
-
-			<!-- Khu vực chọn phòng -->
-
-			<div class="interaction-box">
-				<div class="content-box">
-					<div class="content-box-header">
-						<h2>Phòng chat:</h2>
-
-					</div>
+	<body>
 
 
-					<!-- Bảng danh sách -->
+		<div class="container">
+			<!--Login Page-->
+			<div class="full-page-background background-fixed" id="messageArea">
 
-					<div class="content-window">
+				<!-- Khu vực chọn phòng -->
 
-						<!-- Tag <a> ở dưới là 1 item phòng chat của danh sách phòng, cho nó vào vòng lặp để in ra danh sách các phòng -->
-						<ul class="list-group" id="users"></ul>
-					</div>
+				<div class="interaction-box">
+					<div class="content-box">
+						<div class="content-box-header">
+							<h2>Phòng chat:</h2>
 
-					<div class="col-md-8">
-						<div class="chat" id="chat"></div>
+						</div>
 
-						<form id="messageForm">
-							<div class="form-group">
-								<table>
-									<tr>
-										<!-- Khu vực gõ tin nhắn và nút gửi  !-->
-										<th><textarea class="form-control" id="message"
-												placeholder="Nhập tin nhắn..."></textarea></th>
-										<th> <input type="submit" class="btn btn-primary" value="Gửi tin nhắn" /></th>
-									</tr>
-								</table>
-							</div>
-						</form>
+
+						<!-- Bảng danh sách -->
+
+						<div class="content-window">
+
+							<!-- Tag <a> ở dưới là 1 item phòng chat của danh sách phòng, cho nó vào vòng lặp để in ra danh sách các phòng -->
+							<ul class="list-group" id="users"></ul>
+						</div>
+
+						<div class="col-md-8">
+							<div class="chat" id="chat"></div>
+
+							<form id="messageForm">
+								<div class="form-group">
+									<table>
+										<tr>
+											<!-- Khu vực gõ tin nhắn và nút gửi  !-->
+											<th><textarea class="form-control" id="message"
+					      placeholder="Nhập tin nhắn..."></textarea></th>
+											<th> <input type="submit" class="btn btn-primary" value="Gửi tin nhắn" /></th>
+										</tr>
+									</table>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
+
+				<!-- Khu vực cho những tính năng khác -->
 			</div>
-
-			<!-- Khu vực cho những tính năng khác -->
 		</div>
-	</div>
 
-	<script>
-		$(function () {
-			var socket = io("http://localhost:3000");
-			var $messageForm = $('#messageForm');
-			var $message = $('#message');
-			var $chat = $('#chat');
-			var $messageArea = $('#messageArea');
-			var $users = $('#users');
-			let $username = $('#username');
+		<script>
+			$(function () {
+				var socket = io("http://localhost:3000");
+				var $messageForm = $('#messageForm');
+				var $message = $('#message');
+				var $chat = $('#chat');
+				var $messageArea = $('#messageArea');
+				var $users = $('#users');
+				let $username = $('#username');
 
-			$messageForm.submit(function (e) {
-				e.preventDefault();
-				socket.emit('send message', $message.val());
-				$message.val('');
+				$messageForm.submit(function (e) {
+					e.preventDefault();
+					socket.emit('send message', $message.val());
+					$message.val('');
+				});
+
+				// send message
+				// TODO: chỉnh css cho từng dòng chat 
+				socket.on('new message', function (data) {
+					$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + '</div>');
+				});
+
+				//after login
+				socket.emit('new user', $username.val(), function (data) {
+					$messageArea.show();
+				});
+
+				socket.on('get users', function (data) {
+					var html = '';
+					//  TODO: chỉnh css cho danh sách các id 
+					for (i = 0; i < data.length; i++) {
+						html += '<li class="list-group-item">' + data[i] + '</li>';
+
+					}
+					$users.html(html);
+				})
 			});
-
-			// send message
-			// TODO: chỉnh css cho từng dòng chat 
-			socket.on('new message', function (data) {
-				$chat.append('<div class="well"><strong>' + data.user + ': </strong>' + data.msg + '</div>');
-			});
-
-			//after login
-			socket.emit('new user', $username.val(), function (data) {
-				$messageArea.show();
-			});
-
-			socket.on('get users', function (data) {
-				var html = '';
-				//  TODO: chỉnh css cho danh sách các id 
-				for (i = 0; i < data.length; i++) {
-					html += '<li class="list-group-item">' + data[i] + '</li>';
-
-				}
-				$users.html(html);
-			})
-		});
-	</script>
-</body>
+		</script>
+	</body>
 
 </html>
