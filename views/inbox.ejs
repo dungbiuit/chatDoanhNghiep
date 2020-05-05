@@ -104,15 +104,16 @@
 
 			// hiển thị dòng chat
 			socket.on('new message', function (data) {
-				$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
-
-				//Script cho tính năng tự động cuộn xuống dưới cùng khi có tin nhắn mới.
-
+				//Lấy tìm chatbox và đo khoảng cách giữa chiều cao cố định của chatbox với chiều cao của content bên trong chatbox
 				var out = document.getElementById("chatbox");
 				var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
-				if(isScrolledToBottom) {
-						out.scrollTop = out.scrollHeight - out.clientHeight;
-				}
+
+				//Tạo bong bóng chat và chuyển tin nhắn vào chatbox
+				$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
+
+				//Nếu chiều cao content lớn hơn chiều cao cố định, thì cuộn cửa sổ xuống dưới cùng
+				if(isScrolledToBottom)
+					out.scrollTop = out.scrollHeight - out.clientHeight;
 			});
 
 			//sau khi login thì show trang nhắn tin
