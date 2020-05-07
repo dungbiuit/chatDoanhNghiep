@@ -102,14 +102,15 @@
 				var $chat = $('#chat');
 				var $messageArea = $('#messageArea');
 				var $users = $('#users');
-
+				let username;
+				socket.emit('connect', socket.id);
 				//gửi đoạn tin nhắn qua id message tại form input
 				$messageForm.submit(function (e) {
 					e.preventDefault();
 					socket.emit('send message', $message.val());
 					$message.val('');
 				});
-
+				//Nhận username từ server
 				// hiển thị dòng chat
 				socket.on('new message', function (data) {
 					//Lấy tìm chatbox và đo khoảng cách giữa chiều cao cố định của chatbox với chiều cao của content bên trong chatbox
@@ -117,6 +118,7 @@
 					var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
 
 					//Tạo bong bóng chat và chuyển tin nhắn vào chatbox
+					//Phần hiện tin nhắn chat trong box
 					if(checkEmptyMessage(data.msg) === false){
 					$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
 					}
