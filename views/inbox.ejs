@@ -94,6 +94,22 @@
 				else
 					return false;
 			}
+			const returnFirstFiveCharactersInMessage = message => {
+				return message.substring(0, 5);
+			}
+
+			const isMessageAnURL = message => {
+				const firstFiveCharacters = returnFirstFiveCharactersInMessage(message);
+				const https = "https";
+
+				if(firstFiveCharacters === https)
+					return true;
+				else
+					return false;
+			}
+			const emitDeleteSocket = (usernameToSend) =>{
+				socket.emit("Send username to remove", usernameToSend);
+			}
 
 			$(function () {
 				var socket = io();
@@ -120,7 +136,16 @@
 					//Tạo bong bóng chat và chuyển tin nhắn vào chatbox
 					//Phần hiện tin nhắn chat trong box
 					if(checkEmptyMessage(data.msg) === false){
-					$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
+						if(isMessageAnURL(data.msg) === true){
+							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item" style="margin-bottom: 3%"> ' + data.user + '</p><a href="' + data.msg + '" class="chat-bubble" > ' + data.msg + ' </a></div>');
+						
+						}
+
+						else{
+							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
+						
+						}
+						
 					}
 					//Nếu chiều cao content lớn hơn chiều cao cố định, thì cuộn cửa sổ xuống dưới cùng
 					if(isScrolledToBottom)
@@ -132,12 +157,18 @@
 				socket.on('get users', function (data) {
 					var html = '';
 					//  chỉnh css cho danh sách các id 
+					//theem button kick ng dùng 
 					for (i = 0; i < data.length; i++) {
-						html += '<div class="member-username-as-item list">' + data[i] + '</div>';
+						html += '<div class="member-username-as-item list">' + data[i] + '<button id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')"> Kick </button></div>';
 					}
 					$users.html(html);
+				});
+				//Alert cho nguoi dung thoat ra
+				socket.on("Alert user to exit", (usernameToKick) => {
+					alert("Get out!!!!!!!!" + usernameToKick);
 				})
 			});
+
 		</script>
 	</body>
 

@@ -1,15 +1,13 @@
-let cookieParser = require("cookie-parser");
+let cookie = require('cookie');
 let express = require("express");
 let body_parser = require("body-parser");
 let app = express();
 
-//
 let users = [];
 let connections = [];
 
 app.use(express.static("public"));
-app.use(body_parser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(body_parser.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -21,8 +19,7 @@ server.listen(process.env.PORT || 3000);
 let usernameArray = [];  
 let usernameTrangChu;
 let mainUserArray = users.slice();
-let socketIDOfUser;
-// connect socket
+let usernameGetInboxPage;
 
 //Chat 
 io.sockets.on('connection', function(socket){
@@ -34,8 +31,9 @@ io.sockets.on('connection', function(socket){
 	//Lấy username từ trangchu (xem trong public/source-control.js)
 	socket.on("Client-send-sign-in", usernameReceive => {
 		//tạo object với username từ trangchu.ejs và socketID là socket.id trangchu.ejs
-		let userObject = {username:usernameReceive, socketID:socket.id,};
+		let userObject = {username:usernameReceive};
 		checkUserObjectToAddArray(userObject, mainUserArray);
+		socket.emit("Send username to inbox page", usernameReceive);
 
 	})
 
@@ -51,9 +49,11 @@ io.sockets.on('connection', function(socket){
 	//usernameArray sẽ chứa tất cả username có trong mảng tất cả user
 	usernameArray = mainUserArray.map(usernameOfEachUser => usernameOfEachUser.username);	
 	console.log(usernameArray);
+
 	function updateUsernames() {
 		io.sockets.emit('get users', usernameArray);
 	}
+
 	//Kiểm tra xem username của userObject có tồn tại hay chưa, nếu chưa thì thêm vào mảng chính
 	const checkUserObjectToAddArray = (userObjectToAdd, userArray) => {
 		for(eachUsername of userArray){
@@ -62,22 +62,33 @@ io.sockets.on('connection', function(socket){
 		}
 		userArray.push(userObjectToAdd);
 	}
+	//Server nhận được username và xóa trong mảng usernameArray 
+	socket.on("Send username to remove", usernameSendFromClickingButton => {
+		let indexOfUsername = usernameArray.indexOf(usernameSendFromClickingButton);
+		usernameArray.splice(indexOfUsername, 1);
+		updateUsernames();
+		socket.emit("Alert user to exit", usernameSendFromClickingButton);
+	});
 
 							// **Vấn đề ở đây khi ở phần user không thể lấy socket.id ra so sánh 
 	socket.on('send message', function(data){
-		let userReceive = returnUsernameInUserArrayWhenSendMessageBySocketID(socket.id, mainUserArray);
+		let cookief = socket.handshake.headers.cookie;
+
+		let cookiesTest = cookie.parse(socket.handshake.headers.cookie);
+		let userReceive = returnUsernameInUserArrayWhenSendMessageBySocketID(cookiesTest.username, mainUserArray);
 		//log trong terminal xem username nhận được là gì -> nhưng hiện tại là undefined do socket.id truyền vào 
 		//không trùng 
-		console.log(userReceive);
+		console.log("Username hien tai la: " + userReceive);
 		//Hàm này sẽ gửi đi message với msg chính là cái message mà nhập trong ô message và user chính là ng nhập
 		io.sockets.emit('new message', {msg: data, user: userReceive});
 		
 	});
+
 		//hàm sẽ trả về username nếu so sánh socketID trùng	
-	const returnUsernameInUserArrayWhenSendMessageBySocketID = (socketIDToCheck, userArray) => {
+	const returnUsernameInUserArrayWhenSendMessageBySocketID = (usernameToCheck, userArray) => {
 		for(eachUser of userArray){
-			if(eachUser.socketID === socketIDToCheck){
-				return eachUser.username;
+			if(eachUser.username === usernameToCheck){
+				return usernameToCheck;
 			}
 		}
 	}
@@ -86,29 +97,16 @@ io.sockets.on('connection', function(socket){
 });
 //Route đến trang chủ khi nhập localhost:3000
 
+// connect socket
 app.get("/", (request,respond) => {
 	respond.render("trangchu");
 });
 
-app.post("/", (request,respond) => {
-	respond.redirect("inbox");
-});
-
 app.get("/inbox", (request,respond) => {
+
+	usernameGetInboxPage = request.query.username;
+	respond.cookie("username", usernameGetInboxPage );
 	respond.render("inbox");
 	
 });
-
-app.get("/trangdangky", (request,respond) => {
-	respond.render("trangdangky");
-});
-
-app.post("/trangdangky", (request,respond) => {
-	console.log(JSON.stringify(request.body));	
-});
-
-app.get("/post-sign-in", (request,respond) => {
-	respond.render("post-sign-in");
-});
-
 
