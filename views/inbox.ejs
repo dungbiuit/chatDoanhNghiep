@@ -94,6 +94,7 @@
 				else
 					return false;
 			}
+
 			const returnFirstFiveCharactersInMessage = message => {
 				return message.substring(0, 5);
 			}
@@ -107,6 +108,7 @@
 				else
 					return false;
 			}
+
 			const emitDeleteSocket = (usernameToSend) =>{
 				socket.emit("Send username to remove", usernameToSend);
 			}
@@ -119,13 +121,16 @@
 				var $messageArea = $('#messageArea');
 				var $users = $('#users');
 				let username;
+
 				socket.emit('connect', socket.id);
+
 				//gửi đoạn tin nhắn qua id message tại form input
 				$messageForm.submit(function (e) {
 					e.preventDefault();
 					socket.emit('send message', $message.val());
 					$message.val('');
 				});
+
 				//Nhận username từ server
 				// hiển thị dòng chat
 				socket.on('new message', function (data) {
@@ -138,15 +143,16 @@
 					if(checkEmptyMessage(data.msg) === false){
 						if(isMessageAnURL(data.msg) === true){
 							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item" style="margin-bottom: 3%"> ' + data.user + '</p><a href="' + data.msg + '" class="chat-bubble" > ' + data.msg + ' </a></div>');
-						
+
 						}
 
 						else{
 							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item">' + data.user + '</p><p class="chat-bubble">' + data.msg + '</p></div>');
-						
+
 						}
-						
+
 					}
+
 					//Nếu chiều cao content lớn hơn chiều cao cố định, thì cuộn cửa sổ xuống dưới cùng
 					if(isScrolledToBottom)
 						out.scrollTop = out.scrollHeight - out.clientHeight;
@@ -163,10 +169,7 @@
 					}
 					$users.html(html);
 				});
-				//Alert cho nguoi dung thoat ra
-				socket.on("Alert user to exit", (usernameToKick) => {
-					alert("Get out!!!!!!!!" + usernameToKick);
-				})
+
 			});
 
 		</script>

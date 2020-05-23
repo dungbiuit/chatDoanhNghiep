@@ -1,3 +1,22 @@
+# Ngày 24/5
+## Việc của chung
+- Tìm cách đưa app lên **ngrok** (Nghe nói app này dạng như localhost cho mọi người luôn nên có thể thử)
+
+## Việc của riêng
+## Đăng
+- [ ] Đổi giao diện sang nền trắng chữ đen hoặc bộ màu nào có thể nổi bật dòng text và tên người gửi
+- [ ] Tìm cách nhấn vào 1 nút có thể đổi sang 1 theme khác (VD màu nền và màu chữ khác ) -> Thử jquery hoặc gắn hàm cho button xem 
+## Hậu
+- [ ] Xác định người user đầu tiên là chủ phòng; chỉ có chủ phòng mới hiện được nút Kick các thành viên khác (từ khóa **ejs template** )
+- [ ] Tìm cách đưa app lên **ngrok**
+
+## Biu 
+- [ ] Tìm cách kick user sau khi nhấn nút Kick 
+- [ ] Đưa app lên **ngrok** hoặc **heroku**
+
+- [ ] Format lại code cho đẹp :)) 
+# Do lịch đến thứ 6 tuần sau và chỉ còn vài chức năng phụ nên mọi người nhớ cố gắng hoàn tất task càng sớm càng tốt để có thời gian cho những môn khác
+
 # Ngày 5/5
 
 ## Việc của chung 
