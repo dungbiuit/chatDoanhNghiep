@@ -45,7 +45,7 @@
 					<!-- Tên phòng -->
 
 					<div class="content-box-header">
-						<h2>Phòng chat số 1</h2>
+						<h2>Phòng chat quickcon</h2>
 					</div>
 
 					<!-- Cửa sổ chat -->
@@ -142,7 +142,7 @@
 					//Phần hiện tin nhắn chat trong box
 					if(checkEmptyMessage(data.msg) === false){
 						if(isMessageAnURL(data.msg) === true){
-							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item" style="margin-bottom: 3%"> ' + data.user + '</p><a href="' + data.msg + '" class="chat-bubble" > ' + data.msg + ' </a></div>');
+							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item"> ' + data.user + '</p><a href="' + data.msg + '" class="chat-bubble chat-bubble-link" target="_blank"> ' + data.msg + ' </a></div>');
 
 						}
 
@@ -165,13 +165,11 @@
 					//  chỉnh css cho danh sách các id 
 					//theem button kick ng dùng 
 					for (i = 0; i < data.length; i++) {
-						html += '<div class="member-username-as-item list">' + data[i] + '<button id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')"> Mute </button></div>';
+						html += '<div class="member-username-as-item list">' + data[i] + '<button class="kick-button kick-button-hoverable" id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')">x</button></div>';
 					}
 					$users.html(html);
 				});
-				socket.on("Alert user to exit", usernameToAlert => {
-					alert(usernameToAlert + "has been kicked");
-				})
+
 			});
 
 		</script>
