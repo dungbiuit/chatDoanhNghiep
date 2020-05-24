@@ -19,6 +19,8 @@ server.listen(process.env.PORT || 3000);
 let usernameArray = [];  
 let usernameGetInboxPage;
 
+let isMuted = false;
+
 //Chat 
 io.sockets.on('connection', function(socket){
 	connections.push(socket);
@@ -52,7 +54,7 @@ io.sockets.on('connection', function(socket){
 	//Kiểm tra xem username của userObject có tồn tại hay chưa, nếu chưa thì thêm vào mảng chính
 	const checkUsernameAddToArray = (usernameToAdd, usernameArray) => {
 		for(eachUsername of usernameArray){
-			if(usernameToAdd === eachUsername)
+			if((usernameToAdd === eachUsername) || (usernameToAdd === "")) 
 				return null;
 		}
 		usernameArray.push(usernameToAdd);
@@ -63,7 +65,9 @@ io.sockets.on('connection', function(socket){
 		let indexOfUsername = usernameArray.indexOf(usernameSendFromClickingButton);
 		usernameArray.splice(indexOfUsername, 1);
 		updateUsernames();
-		socket.emit("Alert user to exit", usernameSendFromClickingButton);
+		socket.disconnect();
+		io.sockets.emit("Alert user to exit", usernameSendFromClickingButton);
+		isMuted = true;
 	});
 
 	// Khi gửi tin nhắn sẽ xem ten username trong  cookie
@@ -74,7 +78,13 @@ io.sockets.on('connection', function(socket){
 		let userReceive = returnUsernameSortInUsernameArray(cookieInboxPage.username, usernameArray);
 		console.log("Username hien tai la: " + userReceive);
 		//Hàm này sẽ gửi đi message với msg chính là cái message mà nhập trong ô message và user chính là ng nhập
-		io.sockets.emit('new message', {msg: data, user: userReceive});
+		//if(isMuted === true){
+			//io.sockets.emit('new message', {msg: ""});
+
+		//}else{
+			//isMuted = false;
+			io.sockets.emit('new message', {msg: data, user: userReceive});
+		//}
 
 	});
 
@@ -85,6 +95,7 @@ io.sockets.on('connection', function(socket){
 				return usernameToCheck;
 			}
 		}
+		return null;
 	}
 
 });

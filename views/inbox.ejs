@@ -165,11 +165,13 @@
 					//  chỉnh css cho danh sách các id 
 					//theem button kick ng dùng 
 					for (i = 0; i < data.length; i++) {
-						html += '<div class="member-username-as-item list">' + data[i] + '<button id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')"> Kick </button></div>';
+						html += '<div class="member-username-as-item list">' + data[i] + '<button id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')"> Mute </button></div>';
 					}
 					$users.html(html);
 				});
-
+				socket.on("Alert user to exit", usernameToAlert => {
+					alert(usernameToAlert + "has been kicked");
+				})
 			});
 
 		</script>
