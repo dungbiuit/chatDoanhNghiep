@@ -46,13 +46,13 @@
 }
 /*Khung nội dung, dành cho danh sách phòng và chatbox*/
 .content-window {
-	width: 90%;
+	width: 87.4%;
 	height: 84%;
 	max-height: 84%;
-	background-color: transparent;
+	background-color: white;
 	position: absolute;
 	top: 50%;
-	left: 50%;
+	left: 48.7%;
 	transform: translate(-50%, -47%);
 	border: 0;
 	border-radius: 0.7em;
@@ -60,8 +60,8 @@
 }
 /*Chat box và chat bubble*/
 .chatbox-background {
-	background-color: white;
-	width: 97%;
+	background-color: transparent;
+	width: 100%;
 	min-height: 100%;
 	height: auto;
 	border-radius: 0.7em;
@@ -88,10 +88,10 @@
 .username-in-chat-item {
 	margin: 0;
 	padding: 0;
-	font-size: 11pt;
+	font-size: 13pt;
 	font-weight: bold;
-	line-height: 11pt;
-	color: slategray;
+	line-height: 13pt;
+	color: black;
 	text-align: left;
 	margin-left: 0.6em;
 }
@@ -103,11 +103,11 @@
 	max-width: 100%;
 	min-height: 1em;
 	height: auto;
-	background-color: slategray;
+	background-color: #f0f2f4;
 	border-radius: 0.7em;
-	color: white;
-	font-size: 14pt;
-	line-height: 14pt;
+	color: black;
+	font-size: 17pt;
+	line-height: 17pt;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
 	padding-top: 0.8em;
@@ -115,36 +115,41 @@
 	word-wrap: break-word;
 	word-break: keep-all;
 }
+
+.chat-bubble-link {
+	color: #0073e6;
+	display: block;
+}
 /*Ô nhập liệu cho chat room*/
 .typein-chatbox {
 	width: 68%;
 	transform: translate(6.8%, -25%);
 }
 
-.typein-chatbox:hover {
+/*.typein-chatbox:hover {
 	transition-duration: 0.1s;
 	width: 69%;
 	transform: translate(7%, -25%);
-}
+}*/
 
 .typein-chatbox-message {
 	width: 78.2%;
 	transform: translate(6%, -25%);
 }
-.typein-chatbox-message:hover {
+/*.typein-chatbox-message:hover {
 	transition-duration: 0.1s;
 	width: 78.6%;
 	transform: translate(5.9%, -25%);
-}
+}*/
 /*Nút riêng của chat room*/
 .chatbox-button {
 	width: 8.1%;
 }
 
-.chatbox-button:hover {
+/*.chatbox-button:hover {
 	transition-duration: 0.1s;
 	width: 8.2%;
-}
+}*/
 
 .green-button {
 	transform: translate(70%, -25%);
@@ -209,7 +214,7 @@
 }
 /*Ô thông tin người dùng*/
 .user-info-box {
-	width: 70%;
+	width: 60%;
 	height: 40%;
 	position: relative;
 	top: 29.3%;
@@ -243,10 +248,12 @@
 }
 
 .chatroom-members-info {
-	height: 73%;
-	max-height: 73%;
-	top: 45.5%;
+	height: 50%;
+	max-height: 50%;
+	top: 34.3%;
 	left: 42%;
+	padding-right: 2%;
+	padding-left: 2%;
 	background-color: transparent;
 	overflow: auto;
 	overflow-y: auto;
@@ -259,21 +266,43 @@
 	display: block;
 	border: none;
 	outline: none;
-	width: 100%;
-	max-width: 100%;
+	width: 73%;
+	max-width: 73%;
 	height: auto;
 	padding-top: 1em;
 	padding-bottom: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
 	text-align: center;
 	font-weight: bold;
 	font-size: 16pt;
 	line-height: 16pt;
 	color: white;
-	background-color: slategray;
+	background-color: #434d56;
 	border-radius: 0.7em;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.kick-button {
+	border-radius: 50%;
+	border: none;
+	outline: none;
+	background-color: whitesmoke;
+	font-size: 16pt;
+	line-height: 16pt;
+	font-weight: bold;
+	color: #434d56;
+	position: absolute;
+	right: 5.5%;
+	cursor: pointer;
+}
+
+.kick-button-hoverable:hover {
+	transition-duration: 0.1s;
+	background-color: indianred;
+	color: white;
 }
 
 /*Nút đăng xuất*/
