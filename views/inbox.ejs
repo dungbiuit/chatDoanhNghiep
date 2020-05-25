@@ -128,7 +128,9 @@
 				var $users = $('#users');
 				let username;
 
-				socket.emit('connect', socket.id);
+				socket.on('connect', () => {
+					socket.emit("Send socketID of current tab", socket.io.engine.id);
+				});
 
 				//gửi đoạn tin nhắn qua id message tại form input
 				$messageForm.submit(function (e) {

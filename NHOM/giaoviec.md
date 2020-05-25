@@ -1,3 +1,7 @@
+# Ngày 26/5
+## Việc của chung
+- [ ] Tìm cách xóa username sau khi đóng tab (Có comment code **TODO**  hướng đi hoặc tìm )
+- [ ] Test lại app xem còn lỗi nào lớn không 
 # Ngày 24/5
 ## Việc của chung
 - Tìm cách đưa app lên **ngrok** (Nghe nói app này dạng như localhost cho mọi người luôn nên có thể thử)

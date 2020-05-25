@@ -16,11 +16,9 @@ let server = require("http").Server(app);
 let io = require("socket.io")(server);
 server.listen(process.env.PORT || 3000);
 
+let cookieObjectArray = [];
 let usernameArray = [];  
 let usernameGetInboxPage;
-
-let isMuted = false;
-
 //Chat 
 io.sockets.on('connection', function(socket){
 	connections.push(socket);
@@ -28,14 +26,27 @@ io.sockets.on('connection', function(socket){
 	console.log("có người log vào với id là  " + socket.id);
 	console.log('Connected: %s sockets connected', connections.length);
 
+	let cookieGetFromInboxPage = socket.handshake.headers.cookie;
+	let cookieInboxPage = cookie.parse(socket.handshake.headers.cookie);
+
+	//Hàm này sẽ cho biết socketID ở tab hiện tại đang mở 
+	//Kiểm tra bằng cách nhấn F12 trong trình duyệt -> Application -> Cookies ->localhost -> Biến io chính là socketIDOfCurrentTab 
+	//TODO Ý tưởng: lưu 2 thuộc tính socketID và username thành 1 object và cho vào 1 mảng cookieObjectArray[] (*), 
+	socket.on("Send socketID of current tab", (socketIDOfCurrentTab) => {
+	cookieObjectArray.push({SocketIOCookie : socketIDOfCurrentTab, UsernameCookie : cookieInboxPage.username});
+	arrayTest = cookieObjectArray.slice(0);
+
+	});
+
+	console.log("cookie Array la: ", arrayTest);
 	//Lấy username từ trangchu (xem trong public/source-control.js)
 	socket.on("Client-send-sign-in", usernameReceive => {
 		checkUsernameAddToArray(usernameReceive, usernameArray);
 		socket.emit("Send username to inbox page", usernameReceive);
-	})
+	});
 
 	updateUsernames();
-
+	//(*) Sau đó trong disconnect này sẽ trả về 1 socket.id của tab đã đóng -> Lấy socket ID đó so sánh với mảng bên trên để trả về username (**)
 	// Disconnect socket
 	socket.on('disconnect', function(){
 		users.splice(users.indexOf(socket.id), 1);
@@ -45,6 +56,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	//usernameArray sẽ chứa tất cả username có trong mảng tất cả user
+	//(**) Sau đó loại bỏ username đó khỏi usernameArray bằng hàm splice()
 	console.log(usernameArray);
 
 	function updateUsernames() {
@@ -82,6 +94,7 @@ io.sockets.on('connection', function(socket){
 	}
 
 });
+
 //Route đến trang chủ khi nhập localhost:3000
 
 app.get("/", (request,respond) => {
