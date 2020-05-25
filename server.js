@@ -37,7 +37,7 @@ io.sockets.on('connection', function(socket){
 	updateUsernames();
 
 	// Disconnect socket
-	socket.on('disconnect', function(data){
+	socket.on('disconnect', function(){
 		users.splice(users.indexOf(socket.id), 1);
 		updateUsernames();
 		connections.splice(connections.indexOf(socket), 1);
@@ -60,17 +60,7 @@ io.sockets.on('connection', function(socket){
 		usernameArray.push(usernameToAdd);
 	}
 
-	//Server nhận được username và xóa trong mảng usernameArray 
-	socket.on("Send username to remove", usernameSendFromClickingButton => {
-		let indexOfUsername = usernameArray.indexOf(usernameSendFromClickingButton);
-		usernameArray.splice(indexOfUsername, 1);
-		updateUsernames();
-		socket.disconnect();
-		io.sockets.emit("Alert user to exit", usernameSendFromClickingButton);
-		isMuted = true;
-	});
-
-	// Khi gửi tin nhắn sẽ xem ten username trong  cookie
+	// Khi gửi tin nhắn sẽ xem ten username trongcookie
 	socket.on('send message', function(data){
 		let cookieGetFromInboxPage = socket.handshake.headers.cookie;
 		let cookieInboxPage = cookie.parse(socket.handshake.headers.cookie);
@@ -78,14 +68,7 @@ io.sockets.on('connection', function(socket){
 		let userReceive = returnUsernameSortInUsernameArray(cookieInboxPage.username, usernameArray);
 		console.log("Username hien tai la: " + userReceive);
 		//Hàm này sẽ gửi đi message với msg chính là cái message mà nhập trong ô message và user chính là ng nhập
-		//if(isMuted === true){
-			//io.sockets.emit('new message', {msg: ""});
-
-		//}else{
-			//isMuted = false;
 			io.sockets.emit('new message', {msg: data, user: userReceive});
-		//}
-
 	});
 
 	//hàm sẽ trả về username nếu so sánh username trùng	
@@ -107,7 +90,7 @@ app.get("/", (request,respond) => {
 
 app.get("/inbox", (request,respond) => {
 	usernameGetInboxPage = request.query.username;
-	respond.cookie("username", usernameGetInboxPage );
+	respond.cookie("username", usernameGetInboxPage);
 	respond.render("inbox");
 });
 

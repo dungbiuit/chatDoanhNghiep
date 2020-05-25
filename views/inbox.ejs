@@ -7,7 +7,7 @@
 		<!-- Scripts -->
 
 		<script src="jquery.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 		<script src="source-control.js"></script>
 		<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 				 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -113,6 +113,12 @@
 				socket.emit("Send username to remove", usernameToSend);
 			}
 
+			const sendUsernameToDeleteToServer = (usernameToDelete) => {
+//				location.href = "/";
+				socket.emit("Username send from clicking X button", usernameToDelete);
+			}
+
+
 			$(function () {
 				var socket = io();
 				var $messageForm = $('#messageForm');
@@ -143,7 +149,6 @@
 					if(checkEmptyMessage(data.msg) === false){
 						if(isMessageAnURL(data.msg) === true){
 							$chat.append('<div class="chat-as-item"><p class="username-in-chat-item"> ' + data.user + '</p><a href="' + data.msg + '" class="chat-bubble chat-bubble-link" target="_blank"> ' + data.msg + ' </a></div>');
-
 						}
 
 						else{
@@ -165,7 +170,7 @@
 					//  chỉnh css cho danh sách các id 
 					//theem button kick ng dùng 
 					for (i = 0; i < data.length; i++) {
-						html += '<div class="member-username-as-item list">' + data[i] + '<button class="kick-button kick-button-hoverable" id="button' + i + '" onClick="emitDeleteSocket(\''+ data[i] +'\')">x</button></div>';
+						html += '<div class="member-username-as-item list">' + data[i] + '</div>';
 					}
 					$users.html(html);
 				});
