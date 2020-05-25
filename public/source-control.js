@@ -1,4 +1,4 @@
-let socket = io("http://localhost:3000");
+let socket = io();
 let signUpButton = $("#sign-up-button");
 
 $(document).ready(() => {
