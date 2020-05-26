@@ -89,8 +89,8 @@
 				<div class="user-info-box chatroom-members-info" id="users">
 				</div>
 				<div class="input-box">
-		      		<input id="sign-out-button" class="button button-hoverable exit-button red-button" type="submit" onclick="history.back()" value="Thoát">
-		    	</div>
+					<input id="sign-out-button" class="button button-hoverable exit-button red-button" type="submit" onclick="history.back()" value="Thoát">
+				</div>
 			</div>
 
 		</div>
@@ -122,12 +122,6 @@
 				socket.emit("Send username to remove", usernameToSend);
 			}
 
-			const sendUsernameToDeleteToServer = (usernameToDelete) => {
-//				location.href = "/";
-				socket.emit("Username send from clicking X button", usernameToDelete);
-			}
-
-
 			$(function () {
 				var socket = io();
 				var $messageForm = $('#messageForm');
@@ -140,6 +134,7 @@
 				socket.on('connect', () => {
 					socket.emit("Send socketID of current tab", socket.io.engine.id);
 				});
+
 
 				//gửi đoạn tin nhắn qua id message tại form input
 				$messageForm.submit(function (e) {
@@ -155,6 +150,10 @@
 					var out = document.getElementById("chatbox");
 					var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
 
+				socket.on("Alert existed username", usernameError => {
+					location.replace("/");
+					alert("Your username: " + usernameError + "is existed, Please try again with different username");
+				}) 
 					//Tạo bong bóng chat và chuyển tin nhắn vào chatbox
 					//Phần hiện tin nhắn chat trong box
 					if(checkEmptyMessage(data.msg) === false){
