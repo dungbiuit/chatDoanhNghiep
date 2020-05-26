@@ -45,7 +45,13 @@
 					<!-- Tên phòng -->
 
 					<div class="content-box-header">
-						<h2>Phòng chat quickcon</h2>
+						<h1>Phòng chat quickcon</h1>
+					</div>
+
+					<!--  -->
+
+					<div class="number-of-users">
+						<h3 id="number-of-users">( 0 người đang tham gia )</h3>
 					</div>
 
 					<!-- Cửa sổ chat -->
@@ -82,6 +88,9 @@
 			<div class="other-box">
 				<div class="user-info-box chatroom-members-info" id="users">
 				</div>
+				<div class="input-box">
+		      		<input id="sign-out-button" class="button button-hoverable exit-button red-button" type="submit" onclick="history.back()" value="Thoát">
+		    	</div>
 			</div>
 
 		</div>
@@ -169,11 +178,13 @@
 				// danh sách các id hiển thị qua html 
 				socket.on('get users', function (data) {
 					var html = '';
+					var numOfusers = document.getElementById("number-of-users");
 					//  chỉnh css cho danh sách các id 
 					//theem button kick ng dùng 
 					for (i = 0; i < data.length; i++) {
 						html += '<div class="member-username-as-item list">' + data[i] + '</div>';
 					}
+					numOfusers.innerHTML = '( ' + data.length + ' người đang tham gia )';
 					$users.html(html);
 				});
 
