@@ -3,7 +3,6 @@ let express = require("express");
 let body_parser = require("body-parser");
 let app = express();
 
-let users = [];
 let connections = [];
 
 app.use(express.static("public"));
@@ -19,6 +18,55 @@ server.listen(process.env.PORT || 3000);
 let cookieObjectArray = [];
 let usernameArray = [];  
 let usernameGetInboxPage;
+let usernameArrayToDelete = [];
+
+						//Các hàm chức năng 
+
+const returnUsernameInArrayWhenComparingSocketIDTabClose = (cookieArray, socketIDTabClose) => {
+	for(eachObject of cookieArray) {
+		if(eachObject.SocketIOCookie === socketIDTabClose)
+			return eachObject.UsernameCookie;
+	}
+	return null;
+}
+
+const addUsernameToUsernameArrayToDelete = (usernameToAdd, UsernameArrayToDelete) => {
+	if(usernameToAdd !== null)
+		UsernameArrayToDelete.push(usernameToAdd);
+}
+
+const checkUsernameExistInArrayToDelete = (arrayToCheck, usernameToCheck) => {
+	for(eachUsername of arrayToCheck){
+		if(usernameToCheck === eachUsername)
+			return true;
+	}
+	return false;
+}
+
+function updateUsernames() {
+	io.sockets.emit('get users', usernameArray);
+}
+
+//hàm sẽ trả về username nếu so sánh username trùng	
+const returnUsernameSortInUsernameArray = (usernameToCheck, usernameArray) => {
+	for(eachUser of usernameArray){
+		if(eachUser === usernameToCheck){
+			return usernameToCheck;
+		}
+	}
+	return null;
+}
+
+const checkUsernameAddToArray = (usernameToAdd, usernameArray) => {
+	for(eachUsername of usernameArray){
+		if((usernameToAdd === eachUsername) || (usernameToAdd === "")) 
+			return null;
+	}
+	usernameArray.push(usernameToAdd);
+}
+
+
+
 //Chat 
 io.sockets.on('connection', function(socket){
 	connections.push(socket);
@@ -26,19 +74,15 @@ io.sockets.on('connection', function(socket){
 	console.log("có người log vào với id là  " + socket.id);
 	console.log('Connected: %s sockets connected', connections.length);
 
-	let cookieGetFromInboxPage = socket.handshake.headers.cookie;
-	let cookieInboxPage = cookie.parse(socket.handshake.headers.cookie);
-
 	//Hàm này sẽ cho biết socketID ở tab hiện tại đang mở 
 	//Kiểm tra bằng cách nhấn F12 trong trình duyệt -> Application -> Cookies ->localhost -> Biến io chính là socketIDOfCurrentTab 
 	//TODO Ý tưởng: lưu 2 thuộc tính socketID và username thành 1 object và cho vào 1 mảng cookieObjectArray[] (*), 
 	socket.on("Send socketID of current tab", (socketIDOfCurrentTab) => {
-	cookieObjectArray.push({SocketIOCookie : socketIDOfCurrentTab, UsernameCookie : cookieInboxPage.username});
-	arrayTest = cookieObjectArray.slice(0);
-
+		let cookieGetFromInboxPage = socket.handshake.headers.cookie;
+		let cookieInboxPage = cookie.parse(socket.handshake.headers.cookie);
+		cookieObjectArray.push({SocketIOCookie:socketIDOfCurrentTab, UsernameCookie:cookieInboxPage.username});
 	});
 
-	console.log("cookie Array la: ", arrayTest);
 	//Lấy username từ trangchu (xem trong public/source-control.js)
 	socket.on("Client-send-sign-in", usernameReceive => {
 		checkUsernameAddToArray(usernameReceive, usernameArray);
@@ -46,31 +90,26 @@ io.sockets.on('connection', function(socket){
 	});
 
 	updateUsernames();
+
+
 	//(*) Sau đó trong disconnect này sẽ trả về 1 socket.id của tab đã đóng -> Lấy socket ID đó so sánh với mảng bên trên để trả về username (**)
 	// Disconnect socket
 	socket.on('disconnect', function(){
-		users.splice(users.indexOf(socket.id), 1);
-		updateUsernames();
-		connections.splice(connections.indexOf(socket), 1);
-		console.log('Disconnected: %s socket connected', connections.length)
-	});
-
-	//usernameArray sẽ chứa tất cả username có trong mảng tất cả user
-	//(**) Sau đó loại bỏ username đó khỏi usernameArray bằng hàm splice()
-	console.log(usernameArray);
-
-	function updateUsernames() {
-		io.sockets.emit('get users', usernameArray);
-	}
-
-	//Kiểm tra xem username của userObject có tồn tại hay chưa, nếu chưa thì thêm vào mảng chính
-	const checkUsernameAddToArray = (usernameToAdd, usernameArray) => {
-		for(eachUsername of usernameArray){
-			if((usernameToAdd === eachUsername) || (usernameToAdd === "")) 
-				return null;
+		//lấy được username từ cookie nhưng do socketIO lấy liên tục nên có thể xuất hiện giá trị null
+		let usernameToDelete = returnUsernameInArrayWhenComparingSocketIDTabClose(cookieObjectArray, socket.id);	
+		//Lọc giá trị null chỉ lấy username chuẩn bị xóa 
+		addUsernameToUsernameArrayToDelete(usernameToDelete, usernameArrayToDelete);
+		
+		//So lại một lần nữa với mảng chứa username sẽ xóa và thực hiện lệnh xóa khỏi ds 
+		if(checkUsernameExistInArrayToDelete(usernameArrayToDelete, usernameToDelete)){
+			usernameArray.splice(usernameArray.indexOf(usernameToDelete), 1);
+			updateUsernames();
 		}
-		usernameArray.push(usernameToAdd);
-	}
+		
+		console.log("Username chuan bi xoa la: " + usernameToDelete);
+		connections.splice(connections.indexOf(socket), 1);
+		console.log('Disconnected: %s socket connected', connections.length);
+	});
 
 	// Khi gửi tin nhắn sẽ xem ten username trongcookie
 	socket.on('send message', function(data){
@@ -80,18 +119,8 @@ io.sockets.on('connection', function(socket){
 		let userReceive = returnUsernameSortInUsernameArray(cookieInboxPage.username, usernameArray);
 		console.log("Username hien tai la: " + userReceive);
 		//Hàm này sẽ gửi đi message với msg chính là cái message mà nhập trong ô message và user chính là ng nhập
-			io.sockets.emit('new message', {msg: data, user: userReceive});
+		io.sockets.emit('new message', {msg: data, user: userReceive});
 	});
-
-	//hàm sẽ trả về username nếu so sánh username trùng	
-	const returnUsernameSortInUsernameArray = (usernameToCheck, usernameArray) => {
-		for(eachUser of usernameArray){
-			if(eachUser === usernameToCheck){
-				return usernameToCheck;
-			}
-		}
-		return null;
-	}
 
 });
 

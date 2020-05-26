@@ -1,6 +1,6 @@
 # Ngày 26/5
 ## Việc của chung
-- [ ] Tìm cách xóa username sau khi đóng tab (Có comment code **TODO**  hướng đi hoặc tìm )
+- [x] Tìm cách xóa username sau khi đóng tab (Có comment code **TODO**  hướng đi hoặc tìm )
 - [ ] Test lại app xem còn lỗi nào lớn không 
 # Ngày 24/5
 ## Việc của chung
