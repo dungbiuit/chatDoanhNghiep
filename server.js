@@ -78,8 +78,8 @@ io.sockets.on('connection', function(socket){
 	
 	//Lấy username từ trangchu (xem trong public/source-control.js)
 	socket.on("Client-send-sign-in", usernameReceive => {
+		if(isUsernameValidToAddToArray(userReceive, usernameArray))
 			addUsernameToArray(usernameReceive, usernameArray);
-		
 	});
 
 	//Hàm này sẽ cho biết socketID ở tab hiện tại đang mở 
