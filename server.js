@@ -78,7 +78,7 @@ io.sockets.on('connection', function(socket){
 	
 	//Lấy username từ trangchu (xem trong public/source-control.js)
 	socket.on("Client-send-sign-in", usernameReceive => {
-		if(isUsernameValidToAddToArray(userReceive, usernameArray))
+		if(isUsernameValidToAddToArray(usernameReceive, usernameArray))
 			addUsernameToArray(usernameReceive, usernameArray);
 	});
 
