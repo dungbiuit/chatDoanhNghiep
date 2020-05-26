@@ -103,7 +103,7 @@
 	max-width: 100%;
 	min-height: 1em;
 	height: auto;
-	background-color: #f0f2f4;
+	background-color: #e6e6e6/*#f0f2f4*/;
 	border-radius: 0.7em;
 	color: black;
 	font-size: 17pt;
@@ -146,10 +146,9 @@
 	width: 8.1%;
 }
 
-/*.chatbox-button:hover {
+.chatbox-button:hover {
 	transition-duration: 0.1s;
-	width: 8.2%;
-}*/
+}
 
 .green-button {
 	transform: translate(70%, -25%);
@@ -167,6 +166,21 @@
 .blue-button:hover {
 	transform: translate(82%, -25%);
 }
+
+.red-button {
+	background-color: red;
+	transform: translate(27%, 217%);
+}
+
+.red-button:hover {
+	width: 56%;
+	transform: translate(26%, 217%);
+}
+
+.exit-button {
+	width: 55%;
+}
+
 /*item phòng chat trong danh sách phòng*/
 .room-as-item {
 	margin-bottom: 2%;
@@ -248,9 +262,9 @@
 }
 
 .chatroom-members-info {
-	height: 50%;
-	max-height: 50%;
-	top: 34.3%;
+	height: 72%;
+	max-height: 72%;
+	top: 45.2%;
 	left: 42%;
 	padding-right: 2%;
 	padding-left: 2%;
@@ -278,11 +292,27 @@
 	font-size: 16pt;
 	line-height: 16pt;
 	color: white;
-	background-color: #434d56;
+	background-color: #374048/*#434d56*/;
 	border-radius: 0.7em;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.number-of-users {
+	color: white;
+	text-align: left;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 1.8%;
+	margin-left: 34%;
+	width: 57%;
+	max-width: 57%;
+	height: auto;
+	word-wrap: break-word;
+	word-break: keep-all;
+	//background-color: cyan;
 }
 
 .kick-button {
