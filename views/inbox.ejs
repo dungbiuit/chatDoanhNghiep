@@ -150,10 +150,6 @@
 					var out = document.getElementById("chatbox");
 					var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
 
-				socket.on("Alert existed username", usernameError => {
-					location.replace("/");
-					alert("Your username: " + usernameError + "is existed, Please try again with different username");
-				}) 
 					//Tạo bong bóng chat và chuyển tin nhắn vào chatbox
 					//Phần hiện tin nhắn chat trong box
 					if(checkEmptyMessage(data.msg) === false){

@@ -31,6 +31,7 @@ const returnUsernameInArrayWhenComparingSocketIDTabClose = (cookieArray, socketI
 }
 
 const addUsernameToUsernameArrayToDelete = (usernameToAdd, UsernameArrayToDelete) => {
+	//có trường hợp nếu không nhập gì nó vẫn gửi null
 	if(usernameToAdd !== null)
 		UsernameArrayToDelete.push(usernameToAdd);
 }
